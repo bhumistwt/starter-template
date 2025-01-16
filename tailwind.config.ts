@@ -7,7 +7,30 @@ const config: Config = {
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extend: {},
+        screen: {
+            sm: "375px",
+            md: "768px",
+            lg: "1200px",
+        },
+        extend: {
+            fontFamily: {
+                sans: 'var(--font-archivo)',
+            },
+            container: {
+                center: true,
+                padding: {
+                    DEFAULT: "1rem",
+                    md: "2rem",
+                    lg: "4rem",
+                },
+            },
+            colors: {
+                "red-orange": {
+                    500: "#F15B2A", 
+                },
+            }, 
+           
+        },
     },
     plugins: [],
 };
