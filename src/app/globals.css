@@ -5,3 +5,7 @@
 :root {
     --red-orange-500: #F15B2A;
 }
+
+.section {
+    @apply py-24 md:py-32 lg:py-40;
+}
