@@ -34,7 +34,7 @@ const Hero: FC = () => {
     });
 
     titleAnimate(
-      titleScope.current.querySelectorAll("word"),
+      titleScope.current.querySelectorAll(".word"),
       {
         transform: "translateY(0)",
       },
