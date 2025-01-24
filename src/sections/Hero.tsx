@@ -1,23 +1,14 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
-/* eslint-disable-nextLine @typescript-eslint/no-unused-vars */
+import { FC, use, useEffect, useRef } from "react";
 import heroImage from "@/assets/images/hero-image.jpg";
 import Image from "next/image";
 import Button from "@/components/Button";
-import SplitType from "split-type";
-import {
-  useAnimate,
-  motion,
-  stagger,
-  useScroll,
-  useTransform,
-} from "motion/react";
-
+import { motion, useScroll, useTransform } from "motion/react";
 import { transform } from "next/dist/build/swc";
+import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 
 const Hero: FC = () => {
-  const [titleScope, titleAnimate] = useAnimate();
   const scrollingDiv = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -27,23 +18,11 @@ const Hero: FC = () => {
 
   const portraitWidth = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
 
-  useEffect(() => {
-    new SplitType(titleScope.current, {
-      types: "lines,words",
-      tagName: "span",
-    });
+  const { scope, entranceAnimation } = useTextRevealAnimation();
 
-    titleAnimate(
-      titleScope.current.querySelectorAll(".word"),
-      {
-        transform: "translateY(0)",
-      },
-      {
-        duration: 0.5,
-        delay: stagger(0.2),
-      }
-    );
-  }, []);
+  useEffect(() => {
+    entranceAnimation();
+  }, [entranceAnimation]);
 
   return (
     <section>
@@ -54,7 +33,7 @@ const Hero: FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0"
-              ref={titleScope}
+              ref={scope}
             >
               Crafting digital experiences through code and creative design
             </motion.h1>
